@@ -22,8 +22,9 @@ class JSDOMEnvironment {
   moduleMocker: ?ModuleMocker;
 
   constructor(config: ProjectConfig): void {
+    const JSDOM = require("jsdom").JSDOM;
     // lazy require
-    this.document = require('jsdom').jsdom(/* markup */ undefined, {
+    this.document = new JSDOM(/* markup */ undefined, {
       url: config.testURL,
     });
     const global = (this.global = this.document.defaultView);
