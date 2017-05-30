@@ -1,0 +1,13 @@
+.DS_STORE
+.eslintcache
+*.swp
+*~
+/build/
+/build-es5/
+/coverage/
+/node_modules/
+coverage
+lerna-debug.log
+npm-debug.log
+npm-debug.log*
+yarn-error.log*
