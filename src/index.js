@@ -4,40 +4,31 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
- * @flow
  */
-
-import type {Script} from 'vm';
-import type {ProjectConfig} from 'types/Config';
-import type {Global} from 'types/Global';
-import type {ModuleMocker} from 'jest-mock';
 
 const {FakeTimers, installCommonGlobals} = require('jest-util');
 const mock = require('jest-mock');
 
 class JSDOMEnvironment {
-  document: ?Object;
-  fakeTimers: ?FakeTimers;
-  global: ?Global;
-  moduleMocker: ?ModuleMocker;
-
-  constructor(config: ProjectConfig): void {
-    const JSDOM = require("jsdom").JSDOM;
+  constructor(config) {
     // lazy require
+    const { JSDOM } = require("jsdom");
+
     this.document = new JSDOM(/* markup */ undefined, {
       url: config.testURL,
+      runScripts: "dangerously",
     });
-    const global = (this.global = this.document.defaultView);
+    const global = (this.global = this.document.window.document.defaultView);
     // Node's error-message stack size is limited at 10, but it's pretty useful
     // to see more than that when a test fails.
-    this.global.Error.stackTraceLimit = 100;
+    global.Error.stackTraceLimit = 100;
     installCommonGlobals(global, config.globals);
 
     this.moduleMocker = new mock.ModuleMocker(global);
     this.fakeTimers = new FakeTimers(global, this.moduleMocker, config);
   }
 
-  dispose(): void {
+  dispose(){
     if (this.fakeTimers) {
       this.fakeTimers.dispose();
     }
@@ -49,9 +40,9 @@ class JSDOMEnvironment {
     this.fakeTimers = null;
   }
 
-  runScript(script: Script): ?any {
+  runScript(script){
     if (this.global) {
-      return require('jsdom').evalVMScript(this.global, script);
+      return this.document.runVMScript(script);
     }
     return null;
   }

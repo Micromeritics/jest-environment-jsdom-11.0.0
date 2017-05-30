@@ -1,6 +1,6 @@
 {
   "name": "jest-environment-jsdom-11.0.0",
-  "version": "20.0.3",
+  "version": "20.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/facebook/jest.git"
@@ -10,6 +10,6 @@
   "dependencies": {
     "jest-mock": "^20.0.3",
     "jest-util": "^20.0.3",
-    "jsdom": "11.0.0"
+    "jsdom": "^11.0.0"
   }
 }
