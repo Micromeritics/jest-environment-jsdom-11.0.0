@@ -1,9 +1,9 @@
 {
   "name": "jest-environment-jsdom-11.0.0",
-  "version": "20.0.8",
+  "version": "20.0.9",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git"
+    "url": "git@github.com:Micromeritics/jest-environment-jsdom-11.0.0.git"
   },
   "license": "BSD-3-Clause",
   "main": "src/index.js",
