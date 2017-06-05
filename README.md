@@ -3,10 +3,11 @@
 ## Rationale
 
 This package was forked into jest-environment-jsdom-11.0.0 in order to support
-jsdom@11.0.0. We need jsdom@11 because of
-<https://github.com/tmpvar/jsdom/issues/1560>, which was partially fixed in
-version 11. Without this version, the graph tests will take a long time (I never
-bothered to test the exact value of that).
+jsdom@11.0.0. We need jsdom@11 because of tmpvar/jsdom#1560, which was
+partially fixed in version 11. Without this version, the graph tests will take
+a long time (I never bothered to test the exact value of that).
+
+The creation of this package was prompted by facebook/jest#3655.
 
 Once Node v4 EOL arrives, jest will likely be updated to use jsdom@11+
 by default, at which time this package is no longer needed.
